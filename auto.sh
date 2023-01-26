@@ -1,27 +1,66 @@
-#!/bin/bash
-
+	#!/bin/bash
 
 zenity --info --width=250 --height=110 --text "<b><span color=\'green\'>CENTRAL DE PROGRAMAS DO LEI</span></b> 
 
 A lista de programas será carregada em breve, porém antes de prosseguir, realize login como <b>administrador do sistema</b>"
 
-pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY bash -c 'selection=$(zenity --width=400 --height=400 --list --checklist --separator="\n" --title="Instalador de programas" --text="Selecione o que deseja instalar:" --column="" --column="Programas" False "VISUAL STUDIO CODE" False "UNITY HUB" False "VIRTUALBOX E EXTENSÃO" False "PYTHON" False "MYSQL WORKBENCH" False "NETBEANS" False "PORTUGOL STUDIO" False "EPOPTES" False "XAMPP" False "PYCHARM")
+pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY bash -c 'selection=$(zenity --width=400 --height=400 --list --checklist --separator="\n" --title="Instalador" --text="Selecione os programas que deseja instalar"\
+--hide-column=2 --print-column=2 --column="Indice" --column="Programas" False "VisualStudio" False "UnityHub" False "VirtualBox" False "Python" False "MYSQLWorkbench" False "NetBeans" False "PortugolStudio" False "Epoptes" False "XAMPP" False "Pycharm" False "Atom")
+
+VisualStudio(){
+	sh /home/administrador/ScriptAutoEps/vsc.sh
+}
+
+UnityHub(){
+	zenity --info --text="Ainda não há nenhum comando para executar"
+}
+
+VirtualBox(){
+	sh /home/administrador/ScriptAutoEps/vtb.sh
+}
+
+Python(){
+	sh /home/administrador/ScriptAutoEps/pyt.sh
+}
+
+MYSQLWorkbench(){
+	sh /home/administrador/ScriptAutoEps/mysql.sh
+}
+
+NetBeans(){
+	sh /home/administrador/ScriptAutoEps/ntb.sh
+}
+
+PortugolStudio(){
+	sh /home/administrador/ScriptAutoEps/ptgs.sh
+}
+
+Epoptes(){
+	sh /home/administrador/ScriptAutoEps/eppt.sh
+}
+
+XAMPP(){
+	sh /home/administrador/ScriptAutoEps/lmpp.sh
 
 
-case "$selection" in
+Pycharm(){
+	zenity --info --text="Ainda não há nenhum comando para executar"
+}
 
-"VISUAL STUDIO CODE")sh /home/administrador/ScriptAutoEps/vsc.sh 2>/dev/null ;;
-"UNITY HUB")sh /home/administrador/Documentos/scripts/exe.sh 2>/dev/null ;;
-"VIRTUALBOX E EXTENSÃO")sh /home/administrador/ScriptAutoEps/vtb.sh 2>/dev/null ;;
-"PYTHON")sh /home/administrador/ScriptAutoEps/pyt.sh 2>/dev/null;;
-"MYSQL WORKBENCH")  ;;
-"NETBEANS")sh /home/administrador/ScriptAutoEps/ntb.sh 2>/dev/null ;;
-"PORTUGOL STUDIO")sh /home/administrador/ScriptAutoEps/ptgs.sh 2>/dev/null ;;
-"EPOPTES")sh /home/administrador/ScriptAutoEps/eppt.sh 2>/dev/null ;;
-"XAMPP")sh /home/administrador/ScriptAutoEps/lmpp.sh 2>/dev/null ;;
-"PYCHARM")  ;;
+Atom(){
+	sh /home/administrador/ScriptAutoEps/atm.sh}
 
-esac
+}
 
+for i in $selection
+do
+	$i
+
+	
+done
 '
 
+if [ $? -eq 0 ]; then
+    zenity --width=180 --height=130 --info --text="<b><span color=\'green\'>A instalação foi concluida
+	  com sucesso!</span></b>"
+fi
